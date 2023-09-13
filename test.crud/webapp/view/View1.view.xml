@@ -1,0 +1,77 @@
+<mvc:View controllerName="sync.c14.test.crud.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <headerContent>
+            <OverflowToolbar >
+                <Button text="생성" press=".onCreate" type="Accept" icon="sap-icon://create"/>
+                <Button text="삭제" press=".onDelete" type="Reject" icon="sap-icon://delete"/>
+            </OverflowToolbar>
+        </headerContent>
+        <content>
+            <Table  id="idTable"
+                    items="{/CarrierSet}"
+                    mode="MultiSelect">
+                <columns>
+                    <Column >
+                        <Label text="{i18n>Carrid}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Carrname}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Currcode}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Url}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Erdat}"/>
+                    </Column>    
+                    <Column >
+                        <Label text="{i18n>Erzet}"/>
+                    </Column>              
+                    <Column >
+                        <Label text="{i18n>Ernam}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Aedat}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Aezet}"/>
+                    </Column>              
+                    <Column >
+                        <Label text="{i18n>Aenam}"/>
+                    </Column>
+                    <Column >
+                        <Label text="{i18n>Action}"/>
+                    </Column>                    
+                                                                                                                                                        
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <ObjectIdentifier title="{Carrid}"/>
+                        <Text text="{Carrname}"/>
+                        <Text text="{Currcode}"/>
+                        <Text text="{Url}"/>
+                        <Text text="{ path:'Erdat', type:'sap.ui.model.odata.type.Date'}"/>
+                        <Text text="{ path:'Erzet', type:'sap.ui.model.odata.type.Time'}"/>
+                        <Text text="{Ernam}"/>
+                        <Text text="{path:'Aedat', type:'sap.ui.model.odata.type.Date'}"/>
+                        <Text text="{path:'Aezet', type:'sap.ui.model.odata.type.Time'}"/>
+                        <Text text="{Aenam}"/>
+                        <Button icon="sap-icon://edit" press=".onOpenDialogEdit"/>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer /> <!-- 이 다음에 나오는 UI element를 우측 끝으로 밀어버림
+                툴바의 빈공간을 쓸데없이 차지하여 다른 UI 들이 우측으로 밀린다.-->
+                <Button text="생성" press=".onCreate" type="Accept" icon="sap-icon://create"/>
+                <Button text="삭제" press=".onDelete" type="Reject" icon="sap-icon://delete"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

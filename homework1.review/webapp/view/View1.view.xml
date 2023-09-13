@@ -1,0 +1,32 @@
+<mvc:View controllerName="ui5.C14.homework1.review.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:m="sap.m"> <!-- sap.m가 기본 기능으로 설정됨-->
+    <m:Page id="page" title="{i18n>title}">
+        <m:content>
+            <m:Table items="{abcd>/ConnSet}"
+                     mode="SingleSelectMaster"
+                     selectionChange=".onSelectionChange"
+                     itemPress=".onItemPress"> <!--한줄을 선택 vs item 눌렀다 -->
+                <m:columns> <!-- 테이블의 라벨 -->
+                    <m:Column><m:Label text="{i18n>colTextCarrid}" /></m:Column>
+                    <m:Column><m:Label text="{i18n>colTextConnid}"/></m:Column>
+                    <m:Column><m:Label text="{i18n>colTextCountryfr}"/></m:Column>
+                    <m:Column><m:Label text="{i18n>colTextCityfrom}"/></m:Column>
+                    <m:Column><m:Label text="{i18n>colTextCountryto}"/></m:Column>
+                    <m:Column><m:Label text="{i18n>colTextCityto}"/></m:Column>
+                </m:columns>
+                <m:items>
+                    <m:ColumnListItem type="Active"> <!--/ConnSet의 라인수만큼 반복되도록 감쌈-->
+                        <!-- ObjectIdnetifier : 키필드-->
+                        <m:ObjectIdentifier title="{abcd>Carrid}"/>
+                        <m:ObjectIdentifier title="{abcd>Connid}"/>
+                        <m:Text text="{abcd>Countryfr}"/>
+                        <m:Text text="{abcd>Cityfrom}"/>
+                        <m:Text text="{abcd>Countryto}"/>
+                        <m:Text text="{abcd>Cityto}"/>
+                    </m:ColumnListItem>
+                </m:items>
+            </m:Table>
+        </m:content>
+    </m:Page>
+</mvc:View>

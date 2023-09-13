@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+
+    <Dialog id="idEditDialog"
+            resizable="true"
+            draggable="true"
+            icon=""
+            title="{i18n>editDialogTitle}">
+        <content>
+            <f:SimpleForm >
+                <f:content>
+                    <Label text="{i18n>Carrid}"/>
+                    <Input value="{edit>/carrier/Carrid}" editable="false"/>
+
+                    <Label text="{i18n>Carrname}"/>
+                    <Input value="{edit>/carrier/Carrname}"/>
+                    
+                    <Label text="{i18n>Currcode}"/>
+                    <Input value="{edit>/carrier/Currcode}"/>
+
+                    <Label text="{i18n>Url}"/>
+                    <Input value="{edit>/carrier/Url}"/>       
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="수정" press=".onEditComplete"/>
+        </beginButton>
+
+        <endButton>
+            <Button text="{i18n>buttonCancel}" press=".onCloseDialogEdit"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

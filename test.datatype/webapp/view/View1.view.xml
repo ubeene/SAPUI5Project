@@ -1,0 +1,49 @@
+<mvc:View controllerName="sync.test.datatype.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <f:SimpleForm layout="ResponsiveGridLayout">
+                <Label text="Salary"/>
+                <Input id="idSalaryInput"
+                       value="{ path: '/employee/salary',
+                                type: 'sap.ui.model.type.Float',
+                                formatOptions: {
+                                    minFractionDigits: 2,
+                                    maxFractionDigits: 2
+                                },
+                                constraints:{
+                                    minimum: 0
+                                }
+                            }"/>
+
+                <Text text='{/employee/salary}'/> 
+
+                <Label text="Number of Employees"/>
+                <Input id="idNumberEmployeesInput"
+                        value="{path: '/company/numOfEmployees',
+                                type: 'sap.ui.model.type.Integer',
+                                formatOptions: { groupingEnabled: true },
+                                constraints: { minimum:1, maximum:1000 }
+                                }"/>
+                <Text text='{/company/numOfEmployees}'/>
+
+                <Label text="Date of Birth"/>
+                <Input id="idDOBInput"
+                        value="{ path: '/employee/birthday',
+                                 type: 'sap.ui.model.type.Date',
+                                 formatOptions: {
+                                 source: { pattern: 'yyyy/MM/dd'},
+                                 style: 'full'
+                        } 
+                    }"/>
+                <DatePicker value="{path: '/employee/birthday',
+                                    type: 'sap.ui.model.type.Date'}"/>
+                <Text text="{/employee/birthday}"/>
+
+            </f:SimpleForm>
+         </content>
+    </Page>
+
+</mvc:View>

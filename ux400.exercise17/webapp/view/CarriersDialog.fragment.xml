@@ -1,0 +1,37 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+
+    <!-- titleDialog: Airline Companies-->
+    <Dialog id="idCarrierDialog"
+            draggable="true"
+            title="{i18n>titleDialog}">
+        <content>
+             <Table items="{/CarrierSet}">
+                 <columns>
+                     <Column><Label text="{i18n>columnTextId}" /></Column>
+                     <Column><Label text="{i18n>columnTextName}" /></Column>
+                     <Column><Label text="{i18n>columnTextCurrency}" /></Column>
+                     <Column><Label text="{i18n>columnTextUrl}" /></Column>
+                 </columns>
+
+                 <items>
+                     <ColumnListItem>
+                         <cells>
+                             <ObjectIdentifier title="{Carrid}"/>
+                             <Text text="{Carrname}"/>
+                             <Text text="{Currcode}"/>
+                             <Text text="{Url}"/>
+                         </cells>
+                     </ColumnListItem>
+                 </items>
+             </Table>
+        </content>
+        <beginButton>
+            <!--textClose : Close-->
+            <Button text="{i18n>textClose}" press=".onCloseDialog"/>
+        </beginButton>
+    </Dialog>
+
+
+</c:FragmentDefinition>

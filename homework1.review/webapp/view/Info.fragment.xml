@@ -1,0 +1,64 @@
+<core:FragmentDefinition
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout">
+
+    <m:Dialog id="idInfoDialog">
+        <m:content> <!-- 버튼 만들기 위해 content 작성-->
+            <form:SimpleForm layout="ResponsiveGridLayout"
+                             labelSpanL="4"
+                             labelSpanM="4"
+                             labelSpanS="4">
+                <form:content> 
+                    <m:Label text="{i18n>colTextCarrid}"/>
+                    <!-- 화면에 지정된 현재위치의 Carrid로 접근
+                        View1의 테이블에서 라인을 선택했을 때
+                        해당 경로를 화면의 현재위치로 지정한다.-->
+                    <m:Text text="{abcd>Carrid}"/>
+
+                    <m:Label text="{i18n>colTextConnid}"/>
+                    <m:Text text="{abcd>Connid}"/>
+
+                    <m:Label text="{i18n>colTextFltime}"/>
+                    <m:Text text="{abcd>Fltime}"/>
+
+                    <m:Label text="{i18n>colTextDeptime}"/>
+                    <m:Text text="{
+                        path: 'Deptime',
+                        model: 'abcd',
+                        type: 'sap.ui.model.odata.type.Time',
+                        formatOptions: {
+                            pattern: 'HH:mm:ss'
+                            }
+                        }"/>
+
+                    <m:Label text="{i18n>colTextArrtime}"/>
+                    <m:Text text="{
+                        path: 'Arrtime',
+                        model: 'abcd',
+                        type: 'sap.ui.model.odata.type.Time'}"/>
+
+                    <m:Label text="{i18n>colTextDistance}"/>
+                    <!-- <m:Text text="{abcd>Distance}{abcd>Distid}"/> -->
+                    <m:ObjectNumber 
+                        number="{ 
+                            parts: [
+                                { path: 'Distance', model: 'abcd'},
+                                { path: 'Distid',   model: 'abcd'}
+                                ],
+                            type: 'sap.ui.model.type.Unit',
+                            formatOptions: {
+                                showMeasure: false
+                            }
+                        }"
+                        unit="{abcd>Distid}"
+                    /> <!--수치 표현할 때 주로 사용-->
+                </form:content>
+            </form:SimpleForm>
+        </m:content>
+        <m:beginButton>
+            <m:Button text="닫기" press=".onCloseDialog"/>
+        </m:beginButton>
+    </m:Dialog>
+</core:FragmentDefinition>

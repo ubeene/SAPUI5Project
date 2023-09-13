@@ -1,0 +1,16 @@
+<mvc:View controllerName="sync.ux400.exercise10.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <List id="idList" items="{/ConnectionSet}" >
+                <items>
+                    <StandardListItem
+                        id="idItem"
+                        title="{Carrid} {Connid}"
+                        description="From {Cityfrom} To {Cityto}" />
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>

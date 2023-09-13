@@ -1,0 +1,171 @@
+<mvc:View controllerName="sync.c14.test.ui.table.58.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout" 
+>
+    <Page id="page" title="{i18n>title}">
+        <content>
+
+            <t:Table
+                id="idCarrierTable"
+                rows="{ path: '/CarrierSet',
+                        parameters: {operationMode: 'Server'}}"
+                selectionMode="MultiToggle"
+                selectionBehavior="Row"
+                visibleRowCount="6"
+                enableBusyIndicator="true"
+                threshold="15" 
+
+            >
+                <t:noData>
+                    <BusyIndicator class="sapUiMediumMargin"/>
+                </t:noData>
+                <t:toolbar>
+                    <OverflowToolbar > <!-- false면 조회모드, true면 수정모드-->
+                        <Title text="ui table의 제목 {= ${view>/edit} ? '수정모드':'조회모드'}" />
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://refresh"
+                                tooltip="Reinitialize Model"
+                                press=".onModelRefresh"/>
+                    </OverflowToolbar>
+                </t:toolbar>
+                <t:columns>
+                    <!-- 항공사 -->
+                    <t:Column>
+                        <!-- 제목   -->
+                        <Label text="{i18n>Carrid}" />
+                        <!-- 데이터 -->
+                        <t:template>
+                            <ObjectIdentifier title="{Carrid}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Carrname}" />
+                        <t:template> <!--Cardinality가 1-->
+                            <l:HorizontalLayout>
+                            <Text text="{Carrname}" visible="{= !${view>/edit}}"/>
+                            <Input value="{Carrname}" visible="{view>/edit}"/>
+                            </l:HorizontalLayout>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Currcode}" />
+
+                        <t:template>
+                            <!-- value 는 선택된 값 items 는 선택할 수 있는 후보 리스트 -->
+                            <ComboBox value="{Currcode}" items="{view>/currency}" enabled="{view>/edit}">
+                                <items>
+                                    <core:Item text="{view>key}" key="{view>key}"/>
+                                </items>
+                            </ComboBox>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Url}" />
+
+                        <t:template>
+                            <l:HorizontalLayout>
+                            <!-- Link는 조회모드에서는 보이지만, 수정모드에서는 안 보임-->
+                            <!-- target="_blank"를 쓰면 새창으로 링크가 뜸-->
+                            <Link text="{Url}" href="{Url}" target="_blank" visible="{= !${view>/edit}}"/>
+                            <!-- Input은 조회모드에서는 안 보이지만, 수정모드에서는 보임-->
+                            <Input value="{Url}" visible="{view>/edit}"/>
+                            </l:HorizontalLayout>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Erdat}" />
+                        <t:template>
+                            <DatePicker
+                                value="{ 
+                                path: 'Erdat', 
+                                type: 'sap.ui.model.odata.type.Date', 
+                                formatOptions: {
+                                    pattern: 'yyyy-MM-dd'
+                                }}" 
+                                editable="false"/> <!-- 항상 안되도록 false, enable="false"도 가능 -->
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Erzet}" />
+                        <t:template>
+                            <TimePicker
+                                value="{
+                                path: 'Erzet',
+                                type: 'sap.ui.model.odata.type.Time',
+                                formatOptions: {
+                                    pattern: 'HH:mm:ss'
+                                }
+                            }" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Ernam}" />
+                        <t:template>
+                            <Text text="{Ernam}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Aedat}" />
+                        <t:template>
+                            <DatePicker
+                                value="{ 
+                                path: 'Aedat', 
+                                type: 'sap.ui.model.odata.type.Date', 
+                                formatOptions: {
+                                    pattern: 'yyyy-MM-dd'
+                                }}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Aezet}" />
+                        <t:template>
+                            <TimePicker
+                                value="{
+                                path: 'Aezet',
+                                type: 'sap.ui.model.odata.type.Time',
+                                formatOptions: {
+                                    pattern: 'HH:mm:ss'
+                                }
+                            }" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <Label text="{i18n>Aenam}" />
+                        <t:template>
+                            <Text text="{Aenam}" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+
+        <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <!-- Horizontal Box 가로로 UI Element가 생성되도록 만드는 박스-->
+                <HBox visible="{= !${view>/edit}}" > <!-- true(조회모드) 일 경우-->
+                <Button text="{i18n>buttonCreate}" press=".onOpenDialogNew" type="Accept"/>
+                <Button text="{i18n>buttonUpdate}" press=".onChangeMode" type="Emphasize" class="sapUiSmallMarginBeginEnd"/>
+                <Button text="{i18n>buttonDelete}" press=".onDelete" type="Reject"/>
+                </HBox>
+                <!-- {= } 표현식에서 !는 값을 반대로 만든다. true면 false, false면 true -->
+                <HBox visible="{= ${view>/edit}}"> <!-- false(수정모드) 일 경우-->
+                    <Button text="{i18n>buttonUpdateComplete}" press=".onUpdate" type="Accept" class="sapUiSmallMarginEnd"/>
+                    <Button text="{i18n>buttonUpdateCancel}" press=".onChangeMode" type="Back"/>
+                </HBox>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

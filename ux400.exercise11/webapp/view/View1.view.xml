@@ -1,0 +1,56 @@
+<mvc:View controllerName="sync.ux400.exercise11.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!--Odata 가져오기 전에 먼저 작동해서 aa로 안나오고 bb 로 나올 확률 있음, 버전이 낮아서 그러거나-->
+            <Table  headerText="Carriers {= ${/CarrierSet/0/Carrid} === 'AA' ? 'AA' : 'BB'}"
+                    items="{/CarrierSet}"
+                    mode="SingleSelectMaster"
+                    selectionChange=".onSelection"> <!--singleSelect :셀모드 선택
+                                            singleSelectMaster : 라인 클릭 가능-->
+                <columns>
+                    <Column ><Label text="Id"></Label></Column>
+                    <Column ><Label text="Carrier name"></Label></Column>
+                    <Column ><Label text="Currency"></Label></Column>
+                    <Column ><Label text="Url"></Label></Column>
+                </columns>
+                <items>
+                    <ColumnListItem > <!--프로퍼티 이름 보고 적어야 함-->
+                        <ObjectAttribute text="{Carrid}"/>
+                        <Text text="{Carrname}"/>
+                        <Text text="{Currcode}"/>
+                        <Text text="{Url}"/>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+
+            <!-- 아래 테이블은 items 경로로 상대경로로 지정한다.
+                상대경로는 이 view에서 bindElement 가 돼있어야 한다.
+                위 테이블에서 라인을 선택하면, 경로 /Carrier('XX')가 
+                이 view의 현재 경로로 bindEelement 된다.
+                
+                하여 아래와 같이 {toConnection} 이라고 적었을 때
+                현재 경로가 위와 같이 설정되었다면
+                {/Carrier('XX')/toConnection} 이라고 적은 것과 같다.-->
+            <Table  id="idConnTable"
+                    headerText="Flight connections - {Carrid} {Carrname}"
+                    items= "{toConnection}">
+                    
+                <columns>
+                    <Column><Label text="Connection ID"></Label></Column>
+                    <Column><Label text="City from"></Label></Column>
+                    <Column><Label text="City to"></Label></Column>
+                </columns>
+                <items>
+                    <ColumnListItem >
+                        <ObjectIdentifier text="{Connid}"/>
+                        <Text text="{Cityfrom}"/>
+                        <Text text="{Cityto}"/>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
