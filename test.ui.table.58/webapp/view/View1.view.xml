@@ -50,7 +50,7 @@
                             <!-- #Carrier : SAP Gateway의 데이터 모델의 Entity Type 명
                                 해당 Property(속성)의 값을 사용하기 위해서는 @을 붙인다.-->
                             <Input value="{Carrname}" visible="{view>/edit}"
-                                    maxLength="{/#Carrier/Carrname/@MaxLength}"/>
+                                    maxLength="{= parseInt(${/#Carrier/Carrname/@maxLength}) }"/>
                             </l:HorizontalLayout>
                         </t:template>
                     </t:Column>
