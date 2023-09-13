@@ -191,6 +191,7 @@ sap.ui.define([
             },
 
             onUpdate : function () {
+                var that = this;
                 // 뷰를 가져온다음 뷰의 모델 가져옴
                 var oView = this.getView();
                 // SAP Gateway로 Update 하기 위한 oData Model
@@ -221,8 +222,19 @@ sap.ui.define([
                         },
                         {
                             success: function (oData, oResponse){
-                                if (number + 1 === array.length)
-                                MessageBox.success("성공");
+                                if (number + 1 === array.length){
+                                    MessageBox.success(
+                                        array.length + " 건이 수정되었습니다.");
+
+                                    // 선택된 라인 해제
+                                    oTable.clearSelection();
+
+                                    //view 모델의 /edit의 값에 따라 수정모드/조회모드로 관리된다.
+                                    // /edit = true 면 수정모드, false면 조회
+                                    // 수정되면 조회모드로 바뀌고 값도 변경, 선택도 해제됨
+                                    that.onChangeMode();
+                                    
+                                }
                             },
                             error: function (oError) {
                                 MessageBox.error("수정실패:"+ oError.responseText);
