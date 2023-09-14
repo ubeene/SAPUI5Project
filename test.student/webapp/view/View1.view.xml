@@ -72,7 +72,8 @@
                             width="11rem">
                             <Label text="{/#Student/Name/@sap:label}" />
                             <t:template>
-                                <Text text="{Name}" wrapping="false" />
+                                <Input value="{Name}"/>
+                                <!-- <Text text="{Name}" wrapping="false" /> -->
                             </t:template>
                         </t:Column>
                         <t:Column
@@ -122,6 +123,7 @@
             <OverflowToolbar >
                 <ToolbarSpacer />
                 <Button text="데이터 삭제" press=".onDelete" icon="sap-icon://delete" type="Reject"/>
+                <Button text="데이터 수정" press=".onUpdate" icon="sap-icon://edit" type="Emphasized"/>
             </OverflowToolbar>
         </footer>
     </Page>

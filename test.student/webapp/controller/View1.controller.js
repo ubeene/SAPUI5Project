@@ -86,6 +86,49 @@ sap.ui.define([
                         }
                     )
                 }
+            },
+
+            onUpdate : function () {
+        
+                var oView = this.getView();
+                var oModel = oView.getModel(); // SAP Gateway로 Update 하기 위한 OData Model
+            
+                var oTable = this.byId("idTable");
+                
+                // 선택된 라인 정보를 가져와 해당 라인들의
+                // 변경사항을 서버로 전송
+                var aIndex = oTable.getSelectedIndices();
+        
+                aIndex.forEach(function(vIndex, number, array) {
+                    // vIndex 숫자에 해당되는 행번호의 데이터를 가져온다
+                    var oContext = oTable.getContextByIndex(vIndex);
+                    // s = String
+                    var sPath = oContext.getPath();
+        
+                    oModel.update(sPath, 
+                    {
+                        Stdno: oContext.getProperty("Stdno"),
+                        Name: oContext.getProperty("Name")
+                    },
+                    {
+                        success: function (oData, oResponse) {
+                            if ( number + 1 === array.length )
+                                MessageBox.success(
+                                array.length + "건이 수정되었습니다");
+                            
+                            // 선택된 라인 해제        
+                            // oTable.clearSelection();
+        
+                            // // view 모델의 /edit 의 값에 따라 수정모드/조회모드로 관리된다.
+                            // // /edit = true면 수정모드, false면 조회
+                            // that.ChangeMode();
+                        },
+                        error: function (oError) {
+                            MessageBox.error("수정실패:" + oError.responseText);
+                        }
+                    });
+                   
+                })    
             }
         });
     });
