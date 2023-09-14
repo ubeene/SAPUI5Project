@@ -40,7 +40,7 @@
 
             <!-- 생성된 데이터를 리스트업 하기 위한 Panel-->
             <Panel headerText="학생 목록" width="100%">
-                <t:Table rows="{/StudentSet}" width="100%" > <!--visibleRowCount="5"-->
+                <t:Table id='idTable' rows="{/StudentSet}" width="100%" > <!--visibleRowCount="5"-->
                     <t:noData>
                         <BusyDialog class="sapUiMediumMargin"/>
                     </t:noData>
@@ -118,5 +118,11 @@
                 </t:Table>
             </Panel>
         </content>
+        <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <Button text="데이터 삭제" press=".onDelete" icon="sap-icon://delete" type="Reject"/>
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>

@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel) {
+    function (Controller, JSONModel, MessageBox) {
         "use strict";
 
         return Controller.extend("sync.c14.test.student.controller.View1", {
@@ -20,7 +21,7 @@ sap.ui.define([
 
                 var oModel = new JSONModel(oData);
                 var oView = this.getView();
-                oView.setModel(oModel, "new");
+                oView.setModel(oModel, "new"); // 모델 저장
             },
 
             // 새로고침 버튼
@@ -31,7 +32,7 @@ sap.ui.define([
 
             onCreate: function () {
                 var oView = this.getView();
-                var oNewModel = oView.getModel("new");
+                var oNewModel = oView.getModel("new"); // 저장된 모델 불러옴
                 var oData = oNewModel.getProperty("/info");
 
                 // 라디오 버튼은 모델과 binding하지 않아서 몇번째 선택했는지 알아옴
@@ -57,6 +58,34 @@ sap.ui.define([
                         });
                     }
                 });
+            },
+
+            onDelete: function () {
+                var oView = this.getView();
+                var oModel = oView.getModel();
+                var oTable = this.byId("idTable");
+
+                var aIndex = oTable.getSelectedIndices();
+                debugger;
+                var nSuccessCount = 0;
+                for( var i=0; i< aIndex.length ; i++) {
+                    var oContext = oTable.getContextByIndex(aIndex[i]);
+                    var sPath = oContext.getPath();
+                    oModel.remove(
+                        sPath,
+                        {
+                            success: function() {
+                                nSuccessCount++;
+                                if(nSuccessCount === i){
+                                MessageBox.success("데이터가 삭제되었습니다.");
+                                }
+                            }, 
+                            error: function( oError ) {
+                                MessageBox.error("삭제실패:" + oError.responeText);
+                            }
+                        }
+                    )
+                }
             }
         });
     });
