@@ -1,0 +1,40 @@
+<mvc:View controllerName="sync.c14.test.fragment.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table id="idTable" 
+                   items="{ path:'/ArticleSet',
+                            parameters: { expand: 'toSupplier'}}"
+                   mode="SingleSelectMaster"
+                   itemPress=".onItemPress">
+                <columns>
+                    <Column><Label text="제품코드"/></Column>
+                    <Column><Label text="제품유형"/></Column>
+                    <Column><Label text="제품종류"/></Column>
+                    <Column><Label text="금액"/></Column>
+                    <Column><Label text="사이즈(h*w*d)"/></Column>
+                    <Column><Label text="무게"/></Column>
+                    <Column><Label text="공급업체"/></Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem type="Active"> <!--itempress를 위해서 필요-->
+                        <ObjectIdentifier title="{Product}" text="부가설명"/>
+                        <Text text="{Producttype}"></Text>
+                        <Text text="{Productcategory}"></Text>
+                        <ObjectNumber unit="{Currency}"
+                                      number="{Price}"/>
+                        
+                        <Text text="{Height} x {Width} x {Depth} (단위:{Dimensionunit})"/>
+                        <ObjectNumber unit="{Weightunit}"
+                                      number="{Weight}"/>
+                        <Text text="{Supplieruuid}"/>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+        </content>
+    </Page>
+</mvc:View>

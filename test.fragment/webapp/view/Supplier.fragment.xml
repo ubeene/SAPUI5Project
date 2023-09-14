@@ -1,0 +1,31 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+
+    <Dialog id="idDialog">
+        <content>
+            <f:SimpleForm >
+                <c:Title text="제품정보"/>
+                <Label text="선택한 제품코드"/>
+                <Text text="{Product}"/>
+
+                <c:Title text="공급처 정보"/>
+                <Label text="공급처 ID"/>
+                <Text text="{Supplieruuid}"/>
+
+                <Label text="공급처"/>
+                <!-- <Text text="{bp>/Businesspartner}({bp>/Companyname})"/> -->
+                <Text text="{toSupplier/Businesspartner}{toSupplier/Companyname}"/>
+                <Label text="연락처"/>
+                <Text text="Phone: {toSupplier/Phonenumber}"/>                               
+                <Text text="Faxno: {toSupplier/Faxnumber}"/>                               
+            </f:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button text="닫기" press=".onCloseDialog"/>
+        </beginButton>
+    </Dialog>
+</c:FragmentDefinition>

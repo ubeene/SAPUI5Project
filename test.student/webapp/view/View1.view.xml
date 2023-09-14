@@ -1,0 +1,122 @@
+<mvc:View controllerName="sync.c14.test.student.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!--데이터 생성을 위한 Panel-->
+            <Panel expandable="true">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="학생 신규 등록" />
+                        <ToolbarSpacer />
+                        <Button text="신규 생성" press=".onCreate" icon="sap-icon://save" type="Accept"/>
+                    </Toolbar>
+                </headerToolbar>
+                    <content>
+                        <f:SimpleForm 
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="3" 
+                        labelSpanL="3" 
+                        labelSpanM="3" 
+                        labelSpanS="3"
+                        >
+                        <Label text="학생번호" />
+                        <Input value="{new>/info/Stdno}" />
+
+                        <Label text="이름" />
+                        <Input value="{new>/info/Name}" />
+
+                        <Label text="성별" />
+                        <RadioButtonGroup id="idRBG" columns="2">
+                            <RadioButton id="idM" text="남성" />
+                            <RadioButton id="idG" text="여성" />
+                        </RadioButtonGroup>
+                        <Button text="신규 생성" press=".onCreate" icon="sap-icon://save" type="Accept"/>
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+
+            <!-- 생성된 데이터를 리스트업 하기 위한 Panel-->
+            <Panel headerText="학생 목록" width="100%">
+                <t:Table rows="{/StudentSet}" width="100%" > <!--visibleRowCount="5"-->
+                    <t:noData>
+                        <BusyDialog class="sapUiMediumMargin"/>
+                    </t:noData>
+                    <!-- 수동 업데이트-->
+                    <t:extension>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button
+                                icon="sap-icon://refresh"
+                                tooltip="Reinitialize Model"
+                                press=".onModelRefresh"/>
+                        </OverflowToolbar>
+                    </t:extension>
+                    <t:columns>
+                        <t:Column
+                            sortProperty="Stdno"
+                            filterProperty="Stdno"
+                            autoResizable="true"
+                            width="11rem">
+                            <Label text="{/#Student/Stdno/@sap:label}" />
+                            <t:template>
+                                <Text text="{Stdno}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            sortProperty="Name"
+                            filterProperty="Name"
+                            autoResizable="true"
+                            width="11rem">
+                            <Label text="{/#Student/Name/@sap:label}" />
+                            <t:template>
+                                <Text text="{Name}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            sortProperty="Gender"
+                            filterProperty="Gender"
+                            autoResizable="true">
+                            <Label text="{/#Student/Gender/@sap:label}" />
+                            <t:template>
+                                <Text text="{Gender}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            sortProperty="Erdat"
+                            filterProperty="Erdat"
+                            autoResizable="true"
+                            width="11rem">
+                            <Label text="{/#Student/Erdat/@sap:label}" />
+                            <t:template>
+                                <Text text="{path: 'Erdat', type: 'sap.ui.model.odata.type.Date'}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            sortProperty="Erzet"
+                            filterProperty="Erzet"
+                            autoResizable="true"
+                            width="11rem">
+                            <Label text="{/#Student/Erdat/@sap:label}" />
+                            <t:template>
+                                <Text text="{path: 'Erzet', type: 'sap.ui.model.odata.type.Time'}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            sortProperty="Ernam"
+                            filterProperty="Ernam"
+                            autoResizable="true"
+                            width="6rem">
+                            <Label text="{/#Student/Ernam/@sap:label}" />
+                            <t:template>
+                                <Text text="{Ernam}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

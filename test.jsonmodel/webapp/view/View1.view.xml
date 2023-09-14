@@ -1,0 +1,37 @@
+<mvc:View controllerName="sync.c14.test.jsonmodel.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:c="sap.ui.core"> <!-- l: 세로 출력 위해서
+                                c: item 추가 위해서-->
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:VerticalLayout >
+                <!-- {} : 모델에 대해서 데이터에 접근하겠다(모델에 접근하겠다)-->
+                <Text text="{/text1}"/>
+                <Text text="{/text2}"/>
+                <Text text="{/text3}"/>
+                <Text text="{/text4}"/>
+            
+                <Input id="idInput1" 
+                       value="{ path: '/int',
+                                type:'sap.ui.model.type.Int'}" 
+                       type="Number"/>
+                <Input id="idInput2" 
+                       value="{ path: '/float',
+                                type:'sap.ui.model.type.Float'}" 
+                       type="Number"/>
+
+                <Text  id="idText" text="{/result}"/> <!-- int의 경로와 float의 경로를 더하기-->
+            
+                <Button text="더하기" press=".onAdd"/>
+            
+                <ComboBox items="{/list}">
+                    <c:Item text="{key}" key="{key}">
+                    </c:Item>
+                </ComboBox>
+            </l:VerticalLayout>
+        </content>
+   
+    </Page>
+</mvc:View>
