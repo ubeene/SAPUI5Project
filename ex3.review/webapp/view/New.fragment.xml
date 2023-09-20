@@ -1,0 +1,80 @@
+<c:FragmentDefinition
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+
+    <!-- 신규 항공편 생성-->
+    <Dialog id="idCreateDialog" 
+            icon="sap-icon://create"
+            title="{i18n>createDialogTitle}">
+        <content>
+            <f:SimpleForm   width="500px"
+                            layout="ResponsiveGridLayout" 
+                            labelSpanS="4"> <!-- 500px로 고정이라 s만 세팅하면 됨-->
+                <f:content>
+                    <!-- 항공사 정보 -->
+                    <c:Title text="{i18n>AirlineInfo}"/>
+                    <Label text="{i18n>Carrid}"/>
+                    <Input value="{new>/Carrid}"/>
+
+                    <Label text="{i18n>Connid}"/>
+                    <Input value="{new>/Connid}"/>
+                    
+                    <!-- 이동 경로 -->
+                    <c:Title text="{i18n>Route}"/>
+                    <Label text="{i18n>Cityfrom}"/>
+                    <Input value="{new>/Cityfrom}"/>
+                    <Label text="{i18n>Countryfr}"/>
+                    <Input value="{new>/Countryfr}"/>
+                    <Label text="{i18n>Airpfrom}"/>
+                    <Input value="{new>/Airpfrom}" required="true"/>
+                    
+                    <Label text="{i18n>Cityto}"/>
+                    <Input value="{new>/Cityto}"/>
+                    <Label text="{i18n>Countryto}"/>
+                    <Input value="{new>/Countryto}"/>
+                    <Label text="{i18n>Airpto}"/>
+                    <Input value="{new>/Airpto}" required="true"/>
+                    
+                    <!-- 시간 및 거리-->
+                    <c:Title text="{i18n>EtcInfo}"/>
+                    <!-- 출발시간 -->
+                    <Label text="{i18n>Deptime}"/>
+                    <!-- Gateway에서 Edm.Time으로 선언했기 때문에-->
+                    <TimePicker value="{
+                        path: '/Deptime',
+                        model: 'new',
+                        type: 'sap.ui.model.odata.type.Time'}"/>
+                    
+                    <!-- 도착시간 -->
+                    <Label text="{i18n>Arrtime}"/>
+                    <!-- Gateway에서 Edm.String으로 선언했기 때문에-->
+                    <TimePicker value="{new>/Arrtime}" valueFormat="HH:mm:ss" 
+                                displayFormat="HH:mm:ss"/>
+
+                    <Label text="{i18n>Distance}"/>
+                    <Input value="{new>/Distance}" />
+                    <ComboBox items="{new>/DistidList}" selectedKey="{new>/Distid}"> <!--value는 텍스트값-->
+                        <items>
+                            <c:Item key="{new>unit}" text="{new>text}"/>
+                        </items>
+                    </ComboBox>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <!-- <buttons>
+        <Button text="{i18n>createCompleteButton}" press=".onCreateComplete"/>
+        <Button text="{i18n>createCancelButton}" press=".onCreateCancel" />
+        <Button text="{i18n>createCancelButton}" press=".onCreateCancel" />
+        </buttons> -->
+        <beginButton>
+            <!-- 생성 완료 -->
+            <Button text="{i18n>createCompleteButton}" press=".onCreateComplete"/>
+            
+        </beginButton>
+        <endButton>
+            <!-- 생성 취소 -->
+            <Button text="{i18n>createCancelButton}" press=".onCreateCancel" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

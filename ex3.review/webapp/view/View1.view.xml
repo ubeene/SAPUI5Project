@@ -1,0 +1,94 @@
+<mvc:View controllerName="sync.c14.ex3.review.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Panel headerText="{i18n>panelHeaderText}">
+                <content>
+                    <t:Table    id="idTable" 
+                                rows="{/ConnectionSet}">
+                        <t:noData>
+                            <BusyDialog />
+                        </t:noData>
+
+                        <t:columns>
+                            <t:Column >
+                                <t:label><Label text="{i18n>Carrid}"/></t:label>
+                                <t:template>
+                                    <ObjectIdentifier  title="{Carrid}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>Connid}"/></t:label>
+                                <t:template>
+                                    <ObjectIdentifier  title="{Connid}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>Cityfrom}"/></t:label>
+                                <t:template>
+                                    <VBox>
+                                        <Text text="{Cityfrom} ({Countryfr})" visible="{= !${view>/edit}}"/>
+                                        <Input value="{Cityfrom}" visible="{view>/edit}"/>
+                                    </VBox>
+                                </t:template>
+                            </t:Column>
+
+                            <!-- 출발국가 -->
+                            <t:Column visible="{view>/edit}">
+                                <t:label><Label text="{i18n>Countryfr}"/></t:label>
+                                <t:template>
+                                    <Input value="{Countryfr}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>Cityto}"/></t:label>
+                                <t:template>
+                                    <Text text="{Cityto} ({Countryto})"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>Fltime}"/></t:label>
+                                <t:template>
+                                    <Text   text="{path:'Deptime', 
+                                            type:'sap.ui.model.odata.type.Time', 
+                                            formatOptions: {pattern:'HH:mm:ss'}
+                                        } ~ {Arrtime}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>Distance}"/></t:label>
+                                <t:template>
+                                    <ObjectNumber number="{
+                                                            parts:[{path:'Distance'}, {path:'Distid'}],
+                                                            type:'sap.ui.model.type.Unit',
+                                                            formatOptions:{ showMeasure:false }
+                                                        }" 
+                                                            unit="{Distid}"/>
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </content>
+            </Panel>
+        </content>
+        <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <!-- view 모델의 /edit가 false 일 때만 화면에 보이도록 한다.-->
+                <Button text="{i18n>createButton}" press=".onOpenCreateDialog" icon="sap-icon://create" type="Accept" visible="{= !${view>/edit}}"/>
+                <Button text="{i18n>updateButton}" press=".onChangeMode" icon="sap-icon://edit" type="Accept" visible="{= !${view>/edit}}"/>
+
+                <!-- view 모델의 /edit가 true 일 때만 화면에 보이도록 한다.-->
+                <Button text="{i18n>saveButton}" press=".onSave" icon="sap-icon://save" type="Accept" visible="{view>/edit}"/>
+                <Button text="{i18n>cancelButton}" press=".onChangeMode" icon="sap-icon://cancel" type="Reject" visible="{view>/edit}"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

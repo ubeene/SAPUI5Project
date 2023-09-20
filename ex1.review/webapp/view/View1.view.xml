@@ -1,0 +1,46 @@
+<mvc:View controllerName="sync.c14.ex1.review.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:c="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Panel headerText="{i18n>panelHeaderText}"> <!-- 패널로 디자인 형태 잡아주기-->
+                <content>
+                    <f:SimpleForm layout="ResponsiveGridLayout" >
+                        <f:content>
+                            <!-- subTitle1=숫자 입력-->
+                            <c:Title text="{i18n>subTitle1}" />
+                            <!-- inputNum1=숫자 1-->
+                            <Label text="{i18n>inputNum1}"/>
+                            <Input value="{/inputNum1}" required="true" type="Number"/> <!-- 숫자만 입력받도록 조건-->
+                            <Label text="{i18n>inputNum2}"/>
+                            <Input value="{/inputNum2}" required="true" type="Number"/>
+                            <!-- 기본 모델에 저 경로의 데이터가 있어야만 데이터가 저장됨-->
+
+                            <!-- subTitle2=결과 출력-->
+                            <c:Title text="{i18n>subTitle2}" />
+
+                            <Label text="{i18n>add}"/>
+                            <Text text="{/outputAdd}"/>
+                            <Button text="{i18n>addButton}" press=".onAdd"/>
+
+                            <Label text="{i18n>subtract}"/>
+                            <Text text="{/outputSubtract}"/>
+                            <Button text="{i18n>SubtractButton}" press=".onSubtract"/>
+
+                            <Label text="{i18n>multiple}"/>
+                            <Text text="{path:'/outputMultiple',
+                                         type:'sap.ui.model.type.Float'}"/>
+                            <Button text="{i18n>MultipleButton}" press=".onMultiple"/>
+
+                            <Label text="{i18n>divide}"/>
+                            <Text text="{/outputDivide}"/>
+                            <Button text="{i18n>DivideButton}" press=".onDivide"/>                        
+                        </f:content>
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

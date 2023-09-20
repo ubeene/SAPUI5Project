@@ -1,0 +1,131 @@
+<mvc:View controllerName="sync.c14.ex2.review.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Panel headerText="{i18n>panelHeaderText}" expandable="true"
+                    expanded="true"> <!-- expanded로 기본 펼쳐져있도록-->
+                <content>
+                    <t:Table
+                        id="idTable" 
+                        rows="{path:'/FlightSet',
+                                parameters: {
+                                    expand: 'toConnection'
+                                }}"
+                        selectionMode="Single"
+                        selectionBehavior="Row"
+                        rowSelectionChange=".onOpenDialog"> <!-- 한줄 선택 ,아무 칸 눌러도 라인 선택-->
+
+                        <t:noData>
+                            <BusyDialog />
+                        </t:noData>
+                        <t:columns>
+                            <t:Column width="100px">
+                                <!-- <t:label> -->
+                                    <Label text="{i18n>Carrid}" />
+                                <!-- </t:label> -->
+                                <t:template>
+                                    <!-- {Carrid} 라는 의미는
+                                        위에서 rows={/FlightSet}라고 지정되어
+                                        {/FlightSet} 밑의 {Carrid} 라는 의미가 된다.
+                                        (/를 안 적어서 상대적으로 경로를 바라봤다)-->
+                                    <ObjectIdentifier title="{Carrid}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column width="100px" >
+                                <t:label>
+                                    <Label text="{i18n>Connid}" />
+                                </t:label>
+                                <t:template>
+                                    <ObjectIdentifier title="{Connid}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column width="100px">
+                                <t:label>
+                                    <Label text="{i18n>Fldate}" />
+                                </t:label>
+                                <t:template> <!-- 보기 불편해서 pattern 적용해줘야 함-->
+                                    <Text text="{
+                                        path: 'Fldate',
+                                        type: 'sap.ui.model.odata.type.Date',
+                                        formatOptions: {
+                                            pattern:'yyyy-MM-dd'}
+                                        }"/> <!--ex) 2023-03-02-->
+                                </t:template>
+                            </t:Column>
+
+                            <!--운임금액-->
+                            <t:Column >
+                                <t:label><Label text="{i18n>Price}"/></t:label>
+                                <t:template>
+                                    <!-- <ObjectNumber number="{Price}" unit="{Currency}"/>
+                                    천 단위로 , 나타내려면 아래와 같이 나타냄 -->
+                                    <ObjectNumber 
+                                        number="{
+                                            parts:[{path:'Price'}, {path:'Currency'}],
+                                            type: 'sap.ui.model.type.Currency',
+                                            formatOptions: {
+                                                showMeasure: false }
+                                            }"
+                                            unit="{Currency}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <!--비행기-->
+                            <t:Column >
+                                <t:label><Label text="{i18n>Planetype}"/></t:label>
+                                <t:template>
+                                    <Text text="{Planetype}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <!--최대좌석수--> 
+                            <t:Column >
+                                <t:label><Label text="{i18n>Seatsmax}"/></t:label>
+                                <t:template>
+                                    <Text text="{Seatsmax}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <!--예약좌석수-->
+                            <t:Column >
+                                <t:label><Label text="{i18n>Seatsocc}"/></t:label>
+                                <t:template>
+                                    <Text text="{Seatsocc}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <!--잔여좌석수-->
+                            <!-- {= } : 조건을 걸거나 계산 할 수 있음 특정 경로 가져올 떄 $ 기호써줘야 함-->
+                            <t:Column >
+                                <t:label><Label text="{i18n>Seatsfree}"/></t:label>
+                                <t:template>
+                                    <Text text="{= ${Seatsmax} - ${Seatsocc}}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column >
+                                <t:label><Label text="{i18n>PaymentSum}"/></t:label>
+                                <t:template>
+                                    <!-- <ObjectNumber number="{Paymentsum}" unit="{Currency}"/>-->
+                                    <ObjectNumber 
+                                        number="{
+                                            parts: [{path:'Paymentsum'}, {path:'Currency'}],
+                                            type: 'sap.ui.model.type.Currency',
+                                            formatOptions: {
+                                                showMeasure:false
+                                            }
+                                        }"
+                                        unit="{Currency}"/>
+                                </t:template>
+                            </t:Column>                                                                                                                                          
+                        </t:columns>
+                    </t:Table>
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

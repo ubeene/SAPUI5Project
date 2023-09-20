@@ -1,0 +1,58 @@
+<c:FragmentDefinition
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="idDialog"
+            icon="sap-icon://flight"
+            title="{i18n>dialogTitle}">
+        <content>
+            <f:SimpleForm layout="ResponsiveGridLayout">
+                <f:content>
+                    <!-- 항공사 ID-->
+                    <Label text="{i18n>Carrid}"/>
+                    <Text text="{Carrid}"/>
+
+                    <!-- 항공사 No-->
+                    <Label text="{i18n>Connid}"/>
+                    <Text text="{Connid}"/>
+
+                    <!--출발지 -->
+                    <Label text="{i18n>Depature}"/>
+                    <Text text="{toConnection/Airpfrom},{toConnection/Cityfrom},{toConnection/Countryfr}"/>
+
+                    <!-- 도착지 -> read해서 가져오는 방법으로 (expand 없이 조회 가능) -->
+                    <Label text="{i18n>Arrival}"/>
+                    <Text text="{conn>/Airpto},{toConnection/Cityto},{toConnection/Countryto}"/>
+                    <!-- binding을 한 경우에만 / 안쓰고 나머지 경우에는 써줘야 함-->
+
+                    <!-- 비행시간 -->
+                    <Label text="{i18n>Fltime}"/>
+                    <Text text="{conn2>/Fltime}"/>
+                    
+                    <!-- 출발시간 -->
+                    <Label text="{i18n>Deptime}"/>
+                    <Text text="{path:'conn2>/Deptime', 
+                                type:'sap.ui.model.odata.type.Time',
+                                formatOptions:{
+                                    pattern:'HH:mm:ss'
+                                }}"/>
+
+                    <!-- 도착시간 -->
+                    <Label text="{i18n>Arrtime}"/>
+                    <Text text="{path:'conn2>/Arrtime', type:'sap.ui.model.odata.type.Time'}"/>
+
+                    <!-- 비행거리 -->
+                    <Label text="{i18n>Distance}"/>
+                    <ObjectNumber number="{conn2>/Distance}" unit="{conn2>/Distid}"/>
+
+                    <!-- 비행기간 -->
+                    <Label text="{i18n>Period}"/>
+                    <Text text="{conn2>/Period}"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>closeButton}" press=".onClose"></Button>
+        </beginButton>
+    </Dialog>
+</c:FragmentDefinition>
